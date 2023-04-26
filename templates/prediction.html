@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="../static/css/prediction.css"/>
+    <script src='../static/js/prediction.js' type='text/javascript'></script>
+</head>
+
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light custom-nav fixed-top w-100 py-3">
+            <p class="navbar-brand" style="margin-left: 30px; margin-top: 15px; color: #323232; font-size: 25px">
+                <b> NYC Taxi fare Predictor </b></p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                  </li>
+                  <b>&nbsp;&nbsp;</b>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/prediction" style="color: white; font-weight: bold; background-color: #333;">
+                        Predict <span class="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <b>&nbsp;&nbsp;</b>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/visualize">Visualize</a>
+                  </li>
+                  <b>&nbsp;&nbsp;</b>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/plot">Plot</a>
+                  </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <header class="pt-5">
+        <div class="text-box">
+            <h4 id="title">Taxi Fare Prediction</h4>
+            <hr>
+            <p id="description">Enter details below to predict fare of your ride</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <form id="survey-form" action="{{ url_for('fare_predict')}}" method="post">
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="hour">Hour</label>
+                </div>
+
+                <div class="input-tab">
+                    <select id = "hour" name = "hour" required>
+                        <option disabled value selected> Select Hour from below </option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="day">Day</label>
+                </div>
+
+                <div class="input-tab">
+                    <select id="day" name="day" required>
+                        <option disabled value selected>Select Day from below</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="date">Date</label>
+                </div>
+
+                <div class="input-tab">
+                    <select id="date" name="date" required>
+                        <option disabled value selected>Select Date from below</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="month">Month</label>
+                </div>
+
+                <div class="input-tab">
+                    <select id="month" name="month" required>
+                        <option disabled value selected>Select Month from below</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="passenger">Passenger:</label>
+                </div>
+                <!-- <div>
+                    <input type="number" id="passenger" name="passenger" min="0" max="7" required>
+                </div> -->
+                <div class="input-tab">
+                    <select id="passenger" name="passenger" required>
+                        <option disabled value selected>Select Number of Passengers</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="trip_distance">Trip Distance:</label>
+                </div>
+                <div>
+                    <input type="number" id="trip_distance" name="trip_distance" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="rate_code">Rate Code:</label>
+                </div>
+                <!-- <div>
+                    <input type="number" id="rate_code" name="rate_code" min="0" max="7" required>
+                </div> -->
+                <div class="input-tab">
+                    <select id="rate_code" name="rate_code" required>
+                        <option disabled value selected>Select Rate Code from below</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="payment_type">Payment Type:</label>
+                </div>
+                <!-- <div>
+                    <input type="number" id="payment_type" name="payment_type" min="0" max="6" required>
+                </div> -->
+                <div class="input-tab">
+                    <select id="payment_type" name="payment_type" required>
+                        <option disabled value selected>Select Payment Type from below</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="extra">Extras:</label>
+                </div>
+                <div>
+                    <input type="number" id="extra" name="extra" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="mta_tax">MTA Tax:</label>
+                </div>
+                <div>
+                    <input type="number" id="mta_tax" name="mta_tax" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="tip_amount">Tip Amount:</label>
+                </div>
+                <div>
+                    <input type="number" id="tip_amount" name="tip_amount" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="tolls_amount">Toll Amount:</label>
+                </div>
+                <div>
+                    <input type="number" id="tolls_amount" name="tolls_amount" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="imp_surcharge">Imp Surcharge:</label>
+                </div>
+                <div>
+                    <input type="number" id="imp_surcharge" name="imp_surcharge" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="pickup_location_id">Pickup Location ID:</label>
+                </div>
+                <div>
+                    <input type="number" id="pickup_location_id" name="pickup_location_id" min="0" max="275" step="1" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="dropoff_location_id">Dropoff Location ID:</label>
+                </div>
+                <div>
+                    <input type="number" id="dropoff_location_id" name="dropoff_location_id" min="0" max="275" step="1" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="labels" style="margin-top: 22px">
+                    <label for="trip_duration">Trip Duration(secs):</label>
+                </div>
+                <div>
+                    <input type="number" id="trip_duration" name="trip_duration" step="0.01" required>
+                </div>
+            </div>
+
+            
+            <button id="submit" type="submit">Predict</button>
+            
+
+        </form>
+    </div>
+    
+</body>
+
+
+</html>

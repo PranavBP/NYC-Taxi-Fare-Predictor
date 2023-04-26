@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+body {
+  font-family: 'Abel', sans-serif;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../images/taxi.jpg) center no-repeat fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: visible;
+}
+
+.text-box {
+  background-color: rgba(0, 143, 90, 0.8);
+  border-radius: 20px;
+  margin: 4em auto 2em;
+  padding: 20px;
+  width: 70%;
+}
+
+.custom-nav {
+  /* background-color: #008F5A !important; Replace with your desired background color */
+  background-color: #dcdcdc;
+}
+
+.navbar {
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 80px;
+}
+
+.nav-item .nav-link {
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  border: 1px solid #323232;
+  height: 35px; /* adjust as needed */
+  width: 70px;
+  line-height: 20px; /* adjust as needed */
+  margin-top: 15px; /* adjust as needed */
+  text-align: center;
+}
+
+.nav-item .nav-link:hover {
+  background-color: #b2b2b2;
+}
+  
+/* Set the text color of the table headings to Material green */
+thead th {
+  color: #007248;
+  text-align: center;
+  border: 1px solid #808080;
+}
+
+/* Set the background color of the table headings to black */
+thead {
+  background-color: #21201E;
+}
+
+/* Set the background color of the table rows to dark grey */
+tbody tr {
+  background-color: #333;
+  opacity: 0.8;
+}
+
+/* Set the text color of the table rows to white */
+tbody td {
+  color: white;
+  text-align: center;
+  border: 1px solid #808080;
+}
+
+/* Set the color of the scrollbar to Material green */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #333;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4CAF50;
+}
+
+h4 {
+  font-family: 'Abel', sans-serif;
+  position: relative;
+  margin-top: 5px;
+  text-align: center;
+  font-size: 30px;
+  color: #ddd;
+  text-shadow: 3px 3px 10px #5A5A5A;
+}
+
+p {
+  font-family: 'Abel', sans-serif;
+  position: relative;
+  margin-top: 5px;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
