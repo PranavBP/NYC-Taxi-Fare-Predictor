@@ -9,10 +9,11 @@ body {
 }
 
 .custom-nav {
-    background-color: #dcdcdc !important; /* Replace with your desired background color */
+    background-color: rgba(0, 0, 0, 0.8) !important; /* Replace with your desired background color */
 }
   
 .navbar {
+    border-color: white;
     padding-left: 20px;
     padding-right: 20px;
     height: 80px;
@@ -36,7 +37,7 @@ body {
 }
 
 .text-box {
-    background-color: rgba(0, 143, 90, 0.8);
+    background-color: rgba(241,194,50,0.7);
     border-radius: 20px;
     margin: 4em auto 2em;
     padding: 20px;
@@ -164,3 +165,11 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+/* #dropdown {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 5px;
+} */

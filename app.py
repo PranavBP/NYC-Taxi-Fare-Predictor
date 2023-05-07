@@ -1,8 +1,22 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import pickle 
 import pandas as pd
+import json
 
 app = Flask(__name__)
+
+taxiDf = pd.read_csv('models/taxi_cleaned_model.csv')
+zoneDf = pd.read_csv('models/data/taxi_zones.csv')
+
+hour_dict = dict(taxiDf['hour_in_day'].value_counts())
+labels = list(hour_dict.keys())
+data = [int(val) for val in hour_dict.values()]
+
+zoneDf = zoneDf[["zone", "LocationID"]]
+json_data = zoneDf.to_json(orient='records')
+
+parsed_data = json.loads(json_data)
+print(parsed_data)
 
 @app.route("/")
 def index():
@@ -12,9 +26,14 @@ def index():
 def predict_page_view():
     return render_template("prediction.html")
 
+@app.route('/zone_data')
+def zone_data():
+    return jsonify(parsed_data)
+
+
 @app.route('/visualize')
 def visualize_page_view():
-    return render_template("visualize.html")
+    return render_template("visualize.html", labels = labels, data = data)
 
 @app.route('/fare_predict', methods=['POST'])
 def fare_predict():
@@ -55,5 +74,10 @@ def fare_predict():
 
     return render_template("fare_predict.html", prediction=prediction, input_data=input_taxi_data)
 
+@app.route('/zones')
+def zones_page_view():
+    # pass the JSON data to the template
+    return render_template('zones.html', json_data=parsed_data)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5003)

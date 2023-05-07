@@ -15,8 +15,8 @@
 
 <body>
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light custom-nav fixed-top w-100 py-3">
-            <p class="navbar-brand" style="margin-left: 30px; margin-top: 15px; color: #323232; font-size: 25px">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light custom-nav fixed-top w-100 py-3 border-bottom">
+            <p class="navbar-brand" style="margin-left: 30px; margin-top: 15px; color: #dcdcdc; font-size: 25px">
                 <b> NYC Taxi fare Predictor </b></p>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -213,8 +213,20 @@
                 <div class="labels" style="margin-top: 22px">
                     <label for="dropoff_location_id">Dropoff Location ID:</label>
                 </div>
-                <div>
+                <!-- <div>
                     <input type="number" id="dropoff_location_id" name="dropoff_location_id" min="0" max="275" step="1" required>
+                    <select id="dropdown">
+                        <option></option>
+                    </select>
+                    <b>&nbsp;&nbsp;</b>
+                    <a href="/zones" class="btn btn-primary btn-lg">Taxi Zones Info</a>
+                </div> -->
+                <div class="input-tab">
+                    <select id="dropdown" name="dropdown" required>
+                        <option disabled value selected>Select Payment Type from below</option>
+                    </select>
+                    <b>&nbsp;&nbsp;</b>
+                    <a href="/zones" class="btn btn-primary btn-lg">Taxi Zones Info</a>
                 </div>
             </div>
 

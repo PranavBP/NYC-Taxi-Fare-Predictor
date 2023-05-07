@@ -74,4 +74,17 @@ window.onload = function () {
         paymentTypeDropdown.appendChild(element);
     } 
 
+    fetch('/zone_data')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            const dropdown = document.getElementById('dropdown');
+            data.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option.LocationID;
+                optionElement.text = option.zone;
+                dropdown.add(optionElement);
+            });
+        });
+
 };
