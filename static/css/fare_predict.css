@@ -9,10 +9,12 @@ body {
 }
 
 .custom-nav {
-    background-color: #dcdcdc !important; /* Replace with your desired background color */
+    /* background-color: #dcdcdc !important; Replace with your desired background color */
+    background-color: rgba(0, 0, 0, 0.8) !important;
 }
   
 .navbar {
+    border-color: white;
     padding-left: 20px;
     padding-right: 20px;
     height: 80px;

@@ -11,55 +11,287 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../static/css/visualize.css"/>
-    <!-- <script src='../static/js/visualize.js' type='text/javascript'></script> -->
 </head>
 
 <body>
-    <h4>Bar Chart</h4>
     <div class="container-fluid">
-        <canvas id="myChart"></canvas>
-        <script>
-            var ctx = document.getElementById('myChart').getContext('2d');
-
-            var labels = {{ labels | tojson }};
-            var data = {{ data | tojson }};
-            
-            // Combine labels and data into a list of tuples
-            var labelDataTuples = labels.map((l, i) => [l, data[i]]);
-            
-            // Sort the list of tuples based on the label
-            var sortedLabelDataTuples = labelDataTuples.sort((a, b) => a[0] - b[0]);
-            
-            // Extract the sorted labels and data from the sorted list of tuples
-            var sortedLabels = sortedLabelDataTuples.map((t) => t[0]);
-            var sortedData = sortedLabelDataTuples.map((t) => t[1]);
-
-            var chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: sortedLabels,
-                    datasets: [{
-                        label: 'Hour in Day',
-                        data: sortedData,
-                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#8B008B', '#FFA07A']
-                    }]
-                },
-                options: {
-                    legend: { display: true },
-                    title: {
-                        display: true,
-                        text: 'Hourly Cab ride count distribution'
-                    },
-                    scales: {
-                        xAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-        </script>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light custom-nav fixed-top w-100 py-3 border-bottom">
+            <p class="navbar-brand" style="margin-left: 30px; margin-top: 15px; color: #dcdcdc; font-size: 25px">
+              <b> NYC Taxi fare Predictor </b></p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                  </li>
+                  <b>&nbsp;&nbsp;</b>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/prediction">Predict</a>
+                  </li>
+                  <b>&nbsp;&nbsp;</b>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/visualize" style="color: white; font-weight: bold; background-color: #333;">Visualize</a>
+                  </li>
+                  <b>&nbsp;&nbsp;</b>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://data.cityofnewyork.us/Transportation/2018-Yellow-Taxi-Trip-Data/t29m-gskq">Dataset</a>
+                  </li>
+                </ul>
+            </div>
+        </nav>
     </div>
+
+    
+            <h4 class="mt-5 pt-5 px-2 col">Bar Chart</h4>
+            <div class="container-fluid">
+                <canvas id="bar_chart"></canvas>
+                <script>
+                    var ctx = document.getElementById('bar_chart').getContext('2d');
+
+                    var labels = {{ labels | tojson }};
+                    var data = {{ data | tojson }};
+
+                    // Combine labels and data into a list of tuples
+                    var labelDataTuples = labels.map((l, i) => [l, data[i]]);
+
+                    // Sort the list of tuples based on the label
+                    var sortedLabelDataTuples = labelDataTuples.sort((a, b) => a[0] - b[0]);
+
+                    // Extract the sorted labels and data from the sorted list of tuples
+                    var sortedLabels = sortedLabelDataTuples.map((t) => t[0]);
+                    var sortedData = sortedLabelDataTuples.map((t) => t[1]);
+
+                    var chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: sortedLabels,
+                            datasets: [{
+                                label: 'Hour in Day',
+                                data: sortedData,
+                                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#8B008B', '#FFA07A']
+                            }]
+                        },
+                        options: {
+                            legend: { display: true },
+                            title: {
+                                display: true,
+                                text: 'Hourly Cab ride count distribution'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+            </div>
+            
+            <h4 class="mt-5 pt-5 px-2 col">Scatter plot</h4>
+            <div class="container-fluid">
+                <canvas id="scatterplot"></canvas>
+                <script>
+                    // scatterplot.js
+                    const fareAmounts = {{ fare_amounts | tojson }};
+                    const tripDistances = {{ trip_distances | tojson }};
+
+                    const scatterData = {
+                        datasets: [{
+                            label: 'Fare Amount vs. Trip Distance',
+                            data: fareAmounts.map((value, index) => ({ x: value, y: tripDistances[index] })),
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }]
+                    };
+
+                    const options = {
+                        scales: {
+                            xAxes: [{
+                                type: 'linear',
+                                position: 'bottom',
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Fare Amount'
+                                }
+                            }],
+                            yAxes: [{
+                                type: 'linear',
+                                position: 'left',
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Trip Distance'
+                                }
+                            }]
+                        }
+                    };
+
+                    const scatter_ctx = document.getElementById('scatterplot').getContext('2d');
+                    const scatterPlot = new Chart(scatter_ctx, {
+                        type: 'scatter',
+                        data: scatterData,
+                        options: options
+                    });
+
+                </script>
+            </div>
+
+            <h4 class="mt-5 pt-5 px-2 col">Line plot</h4>
+            <div class="container-fluid">
+                <canvas id="lineplot"></canvas>
+                <script>
+                    var line_ctx = document.getElementById('lineplot').getContext('2d');
+                    fetch('/line_plot')
+                    .then(response => response.json())
+                    .then(data => {
+                        // console.log(data)
+                        var chartData = {
+                            labels: Array.from(Array(24).keys(), x => parseInt(x)),
+                            datasets: []
+                        };
+                        for (const [month, values] of Object.entries(data)) {
+                            chartData.datasets.push({
+                                label: `Month ${month}`,
+                                data: values.fare_amount,
+                                borderColor: `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
+                                borderWidth: 1
+                            });
+                        }
+                        var my_line_Chart = new Chart(line_ctx, {
+                            type: 'line',
+                            data: chartData,
+                            options: {
+                                scales: {
+                                    xAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hour in the Day - 24 hour clock'
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Average Fare Amount at the hour'
+                                        }
+                                    }]
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Hourly Variation of Fare Amount of cab'
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </div>
+
+            <h4 class="mt-5 pt-5 px-2 col">Polar Area plot</h4>
+            <div class="container-fluid">
+                <canvas id="piechart"></canvas>
+                <script>
+                    fetch('/polar_plot')
+                        .then(response => response.json())
+                        .then(data => {
+                            // console.log(data)
+                            var piechartData = {
+                                datasets: [{
+                                    data: [],
+                                    backgroundColor: []
+                                }],
+                                labels: []
+                            };
+                            data.forEach(location => {
+                                piechartData.datasets[0].data.push(location.count);
+                                piechartData.labels.push(location.dropoff_location_id);
+                                piechartData.datasets[0].backgroundColor.push(`rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.5)`);
+                            });
+                            var pie_ctx = document.getElementById('piechart').getContext('2d');
+                            var myPieChart = new Chart(pie_ctx, {
+                                type: 'pie',
+                                data: piechartData,
+                                options: {
+                                    title: {
+                                        display: true,
+                                        text: 'Dropoff Location Count'
+                                    },
+                                    legend: {
+                                        position: 'bottom'
+                                    }
+                                }
+                            });
+                        });
+
+
+                </script>
+            </div>
+
+            <h4 class="mt-5 pt-5 px-2 col"> Pie Chart for Day distribution of cabs</h4>
+            <div class="container-fluid">
+                <canvas id="dayPieChart"></canvas>
+                <script>
+                    fetch('/day_pie_chart_data')
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+                            var dayPieChart = new Chart(document.getElementById('dayPieChart'), {
+                                type: 'pie',
+                                data: {
+                                    labels: data.day_labels,
+                                    datasets: [{
+                                        data: data.day_data,
+                                        backgroundColor: ['#ffcd56', '#ff6384', '#36a2eb', '#fd6b19', '#4bc0c0', '#9966ff', '#ffa500']
+                                    }]
+                                },
+                                options: {
+                                    title: {
+                                        display: true,
+                                        text: 'Day distribution of cabs taken'
+                                    }
+                                }
+                            });
+                        });
+                </script>
+                
+            </div>
+
+            <h4 class="mt-5 pt-5 px-2 col">Radar Graph</h4>
+            <div class="container-fluid">
+                <canvas id="radarChart"></canvas>
+                <script>
+                    fetch('/radar_data')
+                    .then(response => response.json())
+                    .then(data => {
+                        var radar_ctx = document.getElementById('radarChart').getContext('2d');
+                        var radar_chart = new Chart(radar_ctx, {
+                            type: 'radar',
+                            data: {
+                                labels: data.rate_code,
+                                datasets: [{
+                                    label: 'Fare Amount',
+                                    data: data.fare_amount,
+                                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scale: {
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </div>
+        
+    
+
+
 </body>
 </html>

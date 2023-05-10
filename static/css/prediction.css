@@ -37,7 +37,7 @@ body {
 }
 
 .text-box {
-    background-color: rgba(241,194,50,0.7);
+    background-color: rgba(0, 143, 90, 0.8);
     border-radius: 20px;
     margin: 4em auto 2em;
     padding: 20px;
@@ -84,7 +84,6 @@ p {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    /* flex-wrap: wrap; */
     align-items: center;
 }
 
@@ -98,7 +97,7 @@ p {
     display: inline-block;
     text-align: right;
     width: 100%;
-    vertical-align: top;
+    vertical-align: middle;
     margin-top: 2px;
     font-size: 16px;
     font-weight: bold;
@@ -147,6 +146,20 @@ input[type=number] {
     font-size: 16px;
 }
 
+a.btn .btn-secondary {
+    color: #fff !important;
+    background-color: #e67e22 !important;
+    border-color: #6c757d;
+    padding: 10px 20px;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+a.btn .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
 button {
     background-color: #e67e22;
     border-radius: 5px;
@@ -160,16 +173,26 @@ button {
     height: 50px;
 }
 
+button:hover {
+    background-color: #bf6516;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* #dropdown {
-    width: 200px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid gray;
-    padding: 5px;
-} */
+/* Set the color of the scrollbar to Material green */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #333;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #4CAF50;
+  }
+  

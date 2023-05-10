@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 def random_forest_regressor():
     taxiDf = pd.read_csv('taxi_cleaned_model.csv')
-    X = taxiDf.drop(['fare_amount', 'total_amount', 'pickup_datetime', 'dropoff_datetime', 'year', 'base_fare'], axis=1)
+    X = taxiDf.drop(['fare_amount'], axis=1)
     y = taxiDf['fare_amount']
 
     x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 0)

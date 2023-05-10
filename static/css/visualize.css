@@ -1,4 +1,91 @@
-#myChart {
-    max-width: 550px;
-    max-height: 400px;
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+body {
+  font-family: 'Abel', sans-serif;
+  background: linear-gradient(rgba(246, 241, 241, 0.8), rgba(246, 241, 241, 0.8)) center no-repeat fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: visible;
 }
+
+.custom-nav {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    /* Replace with your desired background color */
+    /* background-color: #dcdcdc; */
+}
+
+.navbar {
+    border-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 80px;
+}
+
+.nav-item .nav-link {
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    border: 1px solid #323232;
+    height: 35px;
+    /* adjust as needed */
+    width: 70px;
+    line-height: 20px;
+    /* adjust as needed */
+    margin-top: 15px;
+    /* adjust as needed */
+    text-align: center;
+}
+
+.nav-item .nav-link:hover {
+    background-color: #b2b2b2;
+}
+
+#bar_chart {
+    /* max-width: 500px; */
+    max-height: 600px;
+}
+
+#scatterplot {
+    /* max-width: 500px; */
+    max-height: 600px;
+} 
+
+#lineplot {
+    max-height: 600px;
+}
+
+#piechart {
+    max-height: 800px;
+}
+
+#dayPieChart {
+    max-height: 600px;
+}
+
+#radarChart {
+    max-height: 600px;
+}
+
+h4 {
+    font-family: 'Abel', sans-serif;
+    position: relative;
+    margin-top: 5px;
+    text-align: left;
+    font-size: 30px;
+    color: black;
+    text-align: center;
+    text-shadow: 3px 3px 10px #5A5A5A;
+}
+
+/* .canvas-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+canvas {
+    display: inline-block;
+    width: 45%;
+    margin: 0 10px;
+} */
+

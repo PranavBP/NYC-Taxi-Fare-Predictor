@@ -9,9 +9,10 @@ import pickle
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 
+
 def decision_tree_regressor():
     taxiDf = pd.read_csv('taxi_cleaned_model.csv')
-    X = taxiDf.drop(['fare_amount', 'total_amount', 'pickup_datetime', 'dropoff_datetime','year','base_fare'], axis=1)
+    X = taxiDf.drop(['fare_amount'], axis=1)
     y = taxiDf['fare_amount']
 
     # Split the dataset into training and testing sets
