@@ -11,7 +11,7 @@ print(len(taxi2Df))
 taxiDf = taxiDf.sample(frac = 0.25, replace = False, random_state = 1)
 taxiDf = taxiDf.reset_index(drop = True)
 
-zoneDf = pd.read_csv('models/data/taxi_zones.csv')
+zoneDf = pd.read_csv('models/taxi_zones.csv')
 
 hour_dict = dict(taxiDf['hour_in_day'].value_counts())
 labels = list(hour_dict.keys())
