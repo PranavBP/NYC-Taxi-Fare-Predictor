@@ -51,11 +51,11 @@ def visualize_page_view():
 
 @app.route("/line_plot")
 def line_plot():
-    hourly_fare_amount = taxi2Df.groupby(["month", "hour_in_day"])["fare_amount"].mean().reset_index()
-    months = hourly_fare_amount["month"].unique()
+    hourly_fare_amount = taxi2Df.groupby(["months", "hour_in_day"])["fare_amount"].mean().reset_index()
+    months = hourly_fare_amount["months"].unique()
     chart_data = {}
     for month in months:
-        chart_data[str(month)] = hourly_fare_amount[hourly_fare_amount["month"] == month][["hour_in_day", "fare_amount"]].to_dict("list")
+        chart_data[str(month)] = hourly_fare_amount[hourly_fare_amount["months"] == month][["hour_in_day", "fare_amount"]].to_dict("list")
     return jsonify(chart_data)
 
 @app.route('/polar_plot')
@@ -75,8 +75,8 @@ def day_pie_chart_data():
 
 @app.route('/radar_data')
 def radar_data():
-    groupedData = taxiDf.groupby(['rate_code'])['fare_amount'].mean()
-    data_dict = {'rate_code': groupedData.index.tolist(), 'fare_amount': groupedData.tolist()}
+    groupedData = taxi2Df.groupby(['rate_code_dest'])['fare_amount'].mean()
+    data_dict = {'rate_code_dest': groupedData.index.tolist(), 'fare_amount': groupedData.tolist()}
     return jsonify(data_dict)
 
 

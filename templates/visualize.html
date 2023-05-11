@@ -43,8 +43,19 @@
         </nav>
     </div>
 
+            <header class="pt-5">
+                <div class="text-box">
+                    <h4 id="title">NYC Taxi Dataset Visualization</h4>
+                    <hr>
+                    <p id="description">Take a look at the visualization for greater insights.</p>
+                </div>
+            </header>
     
-            <h4 class="mt-5 pt-5 px-2 col">Bar Chart</h4>
+            <h5 class="mt-5 pt-5 px-2 col">Bar Chart</h5>
+            <div class="container">
+                <p>Observation:</p>
+                <p>Hourly variation of pickups - We can see from the above count plots that the number of people booking cabs increases from 6am.</p>
+            </div>
             <div class="container-fluid">
                 <canvas id="bar_chart"></canvas>
                 <script>
@@ -74,24 +85,39 @@
                             }]
                         },
                         options: {
-                            legend: { display: true },
-                            title: {
-                                display: true,
-                                text: 'Hourly Cab ride count distribution'
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Hourly Variation of Total Number Of Cab Pickups'
+                                }
                             },
                             scales: {
-                                xAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Hour in day - 24 hours Clock'
                                     }
-                                }]
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Total Number of Pickups - Count'
+                                    }
+                                }
                             }
                         }
                     });
                 </script>
             </div>
             
-            <h4 class="mt-5 pt-5 px-2 col">Scatter plot</h4>
+            <h5 class="mt-5 pt-5 px-2 col">Scatter plot</h5>
+            <div class="container">
+                <p>A scatter plot is a type of data visualization tool that is commonly used to display the relationship between two numerical variables. It is a graphical representation that displays data points as a collection of dots on a two-dimensional coordinate system. In a scatter plot, the two variables being compared are plotted on the x-axis and y-axis, and each data point represents a single observation in the dataset.</p>
+                <hr>
+                <p>Observation:</p>
+                <p>We see a strong linear relationship between the fare amount and trip distance of the cab.
+                </p>
+            </div>
             <div class="container-fluid">
                 <canvas id="scatterplot"></canvas>
                 <script>
@@ -110,25 +136,27 @@
                     };
 
                     const options = {
-                        scales: {
-                            xAxes: [{
-                                type: 'linear',
-                                position: 'bottom',
-                                scaleLabel: {
+                            plugins: {
+                                title: {
                                     display: true,
-                                    labelString: 'Fare Amount'
+                                    text: 'Scatter Plot - Fare Amount vs Trip distance'
                                 }
-                            }],
-                            yAxes: [{
-                                type: 'linear',
-                                position: 'left',
-                                scaleLabel: {
-                                    display: true,
-                                    labelString: 'Trip Distance'
+                            },
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Fare Amount - Dollars'
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Trip Distance - Miles'
+                                    }
                                 }
-                            }]
-                        }
-                    };
+                            }
+                        };
 
                     const scatter_ctx = document.getElementById('scatterplot').getContext('2d');
                     const scatterPlot = new Chart(scatter_ctx, {
@@ -140,7 +168,14 @@
                 </script>
             </div>
 
-            <h4 class="mt-5 pt-5 px-2 col">Line plot</h4>
+            
+            <h5 class="mt-5 pt-5 px-2 col">Line plot</h5>
+            <div class="container">
+                <p>Line plots are a way of representing data points connected by a straight line, often used to track changes over time or between variables.This function allows us to specify the type of plot as "line" and specify the x and y axis data columns by name. This is a convenient way to visualize data.</p>
+                <hr>
+                <p>Observation:</p>
+                <p>Plotting the “hour_in_day” vs the “fare_amount” with the hue being months, We observed that the early morning cabs (4 to 6 AM) and the peak hour (4 to 5 pm) cabs are more expensive throughout the months because that is when the work hour starts and ends for the maximum customers in NYC city.</p>
+            </div>
             <div class="container-fluid">
                 <canvas id="lineplot"></canvas>
                 <script>
@@ -155,7 +190,7 @@
                         };
                         for (const [month, values] of Object.entries(data)) {
                             chartData.datasets.push({
-                                label: `Month ${month}`,
+                                label: `${month}`,
                                 data: values.fare_amount,
                                 borderColor: `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
                                 borderWidth: 1
@@ -165,23 +200,25 @@
                             type: 'line',
                             data: chartData,
                             options: {
-                                scales: {
-                                    xAxes: [{
-                                        scaleLabel: {
-                                            display: true,
-                                            labelString: 'Hour in the Day - 24 hour clock'
-                                        }
-                                    }],
-                                    yAxes: [{
-                                        scaleLabel: {
-                                            display: true,
-                                            labelString: 'Average Fare Amount at the hour'
-                                        }
-                                    }]
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Hourly Variation of Fare amount Of Cab'
+                                    }
                                 },
-                                title: {
-                                    display: true,
-                                    text: 'Hourly Variation of Fare Amount of cab'
+                                scales: {
+                                    x: {
+                                        title: {
+                                            display: true,
+                                            text: 'Hour in day - 24 hours Clock'
+                                        }
+                                    },
+                                    y: {
+                                        title: {
+                                            display: true,
+                                            text: 'Average Fare Amount of the Cab - Dollars'
+                                        }
+                                    }
                                 }
                             }
                         });
@@ -189,8 +226,11 @@
                 </script>
             </div>
 
-            <h4 class="mt-5 pt-5 px-2 col">Polar Area plot</h4>
+            <h5 class="mt-5 pt-5 px-2 col">Pie Chart</h5>
             <div class="container-fluid">
+                <div class="p-3 mt-2 text-center">
+                    <a href="/zones" class="btn btn-secondary btn-lg" role="button">Location ID Information</a>
+                </div>
                 <canvas id="piechart"></canvas>
                 <script>
                     fetch('/polar_plot')
@@ -214,13 +254,15 @@
                                 type: 'pie',
                                 data: piechartData,
                                 options: {
-                                    title: {
-                                        display: true,
-                                        text: 'Dropoff Location Count'
-                                    },
-                                    legend: {
-                                        position: 'bottom'
-                                    }
+                                    plugins: {
+                                        title: {
+                                            display: true,
+                                            text: 'Dropoff Location Count'
+                                        },
+                                        legend: {
+                                            position: 'bottom'
+                                        }
+                                    } 
                                 }
                             });
                         });
@@ -229,7 +271,12 @@
                 </script>
             </div>
 
-            <h4 class="mt-5 pt-5 px-2 col"> Pie Chart for Day distribution of cabs</h4>
+            <h5 class="mt-5 pt-5 px-2 col"> Pie Chart for Day distribution of cabs</h5>
+            <div class="container">
+                <p>Observation:</p>
+                <p>This pie chart shows the days of the week and the percentage of the total number of cabs booked for the particular day of the week.As we can see there is a spike in the number of cabs booked during the mid of the week as these are the days most office goers will have to commute.
+                </p>
+            </div>
             <div class="container-fluid">
                 <canvas id="dayPieChart"></canvas>
                 <script>
@@ -255,21 +302,25 @@
                             });
                         });
                 </script>
-                
             </div>
 
-            <h4 class="mt-5 pt-5 px-2 col">Radar Graph</h4>
+            <h5 class="mt-5 pt-5 px-2 col">Radar Graph</h5>
+            <div class="container">
+                <p>Observation:</p>
+                <p>From this radar graph, we can see average fare amount of cab for different rate_code destinations.</p>
+            </div>
             <div class="container-fluid">
                 <canvas id="radarChart"></canvas>
                 <script>
                     fetch('/radar_data')
                     .then(response => response.json())
                     .then(data => {
+                        console.log(data)
                         var radar_ctx = document.getElementById('radarChart').getContext('2d');
                         var radar_chart = new Chart(radar_ctx, {
                             type: 'radar',
                             data: {
-                                labels: data.rate_code,
+                                labels: data.rate_code_dest,
                                 datasets: [{
                                     label: 'Fare Amount',
                                     data: data.fare_amount,

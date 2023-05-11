@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Abel', sans-serif;
-  background: linear-gradient(rgba(246, 241, 241, 0.8), rgba(246, 241, 241, 0.8)) center no-repeat fixed;
+  background: rgba(246, 241, 241);
   background-size: cover;
   height: 100%;
   overflow: visible;
@@ -26,7 +26,7 @@ body {
     padding-left: 10px;
     padding-right: 10px;
     background-color: white;
-    border: 1px solid #323232;
+    border: 1px solid rgba(0, 143, 90, 0.8);
     height: 35px;
     /* adjust as needed */
     width: 70px;
@@ -39,6 +39,47 @@ body {
 
 .nav-item .nav-link:hover {
     background-color: #b2b2b2;
+}
+
+.text-box {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    margin: 4em auto 2em;
+    padding: 20px;
+    width: 60%;
+}
+
+h4 {
+    font-family: 'Abel', sans-serif;
+    position: relative;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    text-shadow: 3px 3px 10px #5A5A5A;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    margin: 4em auto 2em;
+    padding: 20px;
+    width: 80%;
+}
+
+hr {
+    width: 100%;
+    margin: 10px auto;
+    background-color: white;
+}
+
+p {
+    font-family: 'Abel', sans-serif;
+    position: relative;
+    margin-top: 5px;
+    text-align: left;
+    font-size: 18px;
+    color: white;
 }
 
 #bar_chart {
@@ -67,7 +108,7 @@ body {
     max-height: 600px;
 }
 
-h4 {
+h5 {
     font-family: 'Abel', sans-serif;
     position: relative;
     margin-top: 5px;
@@ -78,14 +119,16 @@ h4 {
     text-shadow: 3px 3px 10px #5A5A5A;
 }
 
-/* .canvas-wrapper {
-    display: flex;
-    justify-content: space-between;
+
+/* Set the color of the scrollbar to Material green */
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-canvas {
-    display: inline-block;
-    width: 45%;
-    margin: 0 10px;
-} */
+::-webkit-scrollbar-track {
+    background: #333;
+}
 
+::-webkit-scrollbar-thumb {
+    background: #4CAF50;
+}
