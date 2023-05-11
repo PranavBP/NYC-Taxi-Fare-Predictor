@@ -6,7 +6,8 @@ import json
 app = Flask(__name__)
 
 taxiDf = pd.read_csv('models/taxi_cleaned_model.csv')
-taxi2Df = pd.read_csv('models/taxi_trip_data_cleaned.csv')
+taxi2Df = pd.read_csv('models/taxi_cleaned.csv')
+print(len(taxi2Df))
 taxiDf = taxiDf.sample(frac = 0.25, replace = False, random_state = 1)
 taxiDf = taxiDf.reset_index(drop = True)
 
